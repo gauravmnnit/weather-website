@@ -14,18 +14,17 @@ const forecast = (latitude, longitude, callback) => {
     } else if (body.error) {
       callback("Unable to find the co-ordinates!", undefined);
     } else {
-      callback(
-        undefined,
-
-        body.current.weather_descriptions[0] +
-          +". It is currently " +
-          body.current.temperature +
-          " degrees. It feels like " +
-          body.current.feelslike +
-          " degrees. There is " +
-          body.current.precip +
-          "% chance of rain."
-      );
+      const mystring={
+        observation_time: body.current.observation_time,
+        temperature: body.current.temperature,
+        weather: body.current.weather_descriptions[0],
+        feels_like: body.current.feelslike,
+        precipitation: body.current.precip,
+        humidity: body.current.humidity,
+        wind_speed: body.current.wind_speed,
+        uv_index: body.current.uv_index
+      };
+      callback(undefined, mystring);
     }
   });
 };
